@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projeto Cloud - AWS + Docker</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .container {
+            background: white;
+            border-radius: 16px;
+            padding: 40px;
+            max-width: 700px;
+            width: 100%;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 32px;
+        }
+
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: #e8f5e9;
+            color: #2e7d32;
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 600;
+            margin-bottom: 16px;
+        }
+
+        .badge-dot {
+            width: 8px;
+            height: 8px;
+            background: #4caf50;
+            border-radius: 50%;
+            animation: pulse 1.5s infinite;
+        }
+
+        @keyframes pulse {
+
+            0%,
+            100% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 0.4;
+            }
+        }
+
+        h1 {
+            font-size: 28px;
+            color: #1a1a2e;
+            margin-bottom: 8px;
+        }
+
+        .subtitle {
+            color: #666;
+            font-size: 15px;
+        }
+
+        .card {
+            background: #f8f9fa;
+            border-radius: 12px;
+            padding: 24px;
+            margin-bottom: 20px;
+            border-left: 4px solid #0f3460;
+        }
+
+        .card h2 {
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #999;
+            margin-bottom: 10px;
+        }
+
+        .mensagem {
+            font-size: 16px;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .erro-card {
+            border-left-color: #e53935;
+            background: #fff5f5;
+        }
+
+        .erro-card .mensagem {
+            color: #c62828;
+        }
+
+        .items-list {
+            list-style: none;
+        }
+
+        .items-list li {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 0;
+            border-bottom: 1px solid #eee;
+            font-size: 15px;
+            color: #444;
+        }
+
+        .items-list li:last-child {
+            border-bottom: none;
+        }
+
+        .items-list li::before {
+            content: '';
+            width: 8px;
+            height: 8px;
+            background: #0f3460;
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+
+        .infra {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 12px;
+            margin-top: 20px;
+        }
+
+        .infra-item {
+            background: #0f3460;
+            color: white;
+            padding: 16px;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        .infra-item .label {
+            font-size: 11px;
+            opacity: 0.7;
+            margin-bottom: 4px;
+            text-transform: uppercase;
+        }
+
+        .infra-item .value {
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 24px;
+            color: #aaa;
+            font-size: 13px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="badge">
+                <div class="badge-dot"></div>
+                Aplicação online
+            </div>
+            <h1>Projeto Cloud AWS do Joaquim</h1>
+            <p class="subtitle">Deploy de Aplicação Web com Docker em Serviços de Nuvem</p>
+        </div>
+        <div th:if="${!erro}" class="card">
+            <h2>Resposta do Backend</h2>
+            <p class="mensagem" th:text="${mensagem}"></p>
+        </div>
+        <div th:if="${erro}" class="card erro-card">
+            <h2>Erro de Conexão</h2>
+            <p class="mensagem" th:text="${mensagem}"></p>
+        </div>
+        <div th:if="${!erro}" class="card">
+            <h2>Dados recebidos</h2>
+            <ul class="items-list">
+                <li th:each="item : ${itens}" th:text="${item}"></li>
+            </ul>
+        </div>
+        <div class="infra">
+            <div class="infra-item">
+                <div class="label">Frontend</div>
+                <div class="value">Porta 8080</div>
+            </div>
+            <div class="infra-item">
+                <div class="label">Backend</div>
+                <div class="value">Porta 25000</div>
+            </div>
+            <div class="infra-item">
+                <div class="label">Cloud</div>
+                <div class="value">AWS EC2</div>
+            </div>
+        </div>
+        <footer>
+            Projeto 01 &mdash; Deploy com Docker na AWS &mdash; Spring Boot
+        </footer>
+    </div>
+</body>
+
+</html>
