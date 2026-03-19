@@ -202,6 +202,6 @@ sudo docker start frontend-container
 
 ---
 
-## 📄 Licença
+## Video
 
-Projeto acadêmico — Disciplina de Serviços em Nuvem — 2026
+Link para o video do projeto: https://youtu.be/amJdaiGFBDA
